@@ -8,13 +8,10 @@ from tensorflow.keras import regularizers
 def training_model(epoch_count=20, batch_size=32):
     # storing Directory containing the training images in a variable
     image_dir = './images/'
-
     # Number of classes
     class_count = 6
-
     # Data augmentation and preprocessing for training images
     data_generator = keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
-
     # Generate batches of augmented training data
     training_generator = data_generator.flow_from_directory(
         image_dir,
