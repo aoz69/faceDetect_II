@@ -1,8 +1,10 @@
+# author: Panas Pokharel
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx necessary imports xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 import tkinter as tk
 from tkinter import messagebox
 from predict import imagePredict
 from model import training_model
+from video import detect_faces
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx necessary imports xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 def message():
     # Clear previous texts written in the box
@@ -24,24 +26,28 @@ def runFile():
 
 def pred():
     # calls imported function for prediction
-    predicted_class, confidence = imagePredict()
-    # converts the console log object into stiring
-    classs = str(predicted_class)
-    # for searching the number of class which is after "[" and before "]"
-    start_index = classs.find("[") + 1
-    end_index = classs.find("]")
-    # conver that string to int again
-    array_value = int(classs[start_index:end_index])
+    # predicted_class, confidence = imagePredict()
+    # print (predicted_class)
+    # # converts the console log object into stiring
+    # classs = str(predicted_class)
+    # # for searching the number of class which is after "[" and before "]"
+    # start_index = classs.find("[") + 1
+    # end_index = classs.find("]")
+    # # conver that string to int again
+    # array_value = int(classs[start_index:end_index])
     # Display the console output of the second file inside the text box
     # Clear previous texts written in the box
     output_text.delete(1.0, tk.END)  
     # gives user idea of what's going on
     output_text.insert(tk.END, "Now detecting face....")
+    detect_faces(printRes)
     # Clear previous texts written in the box
+
+
+def printRes(res):
     output_text.delete(1.0, tk.END) 
     # prints confidance and classs of the predicted face in the app
-    output_text.insert(tk.END, "Confidance is: "+ str(confidence) + " person belongs to class: " + str(array_value))
-
+    output_text.insert(tk.END,  "Person in the frame is: " + str(res))
 # Create the window
 window = tk.Tk()
 #  name the window face detector
@@ -60,3 +66,5 @@ output_text.pack()
 
 # Start the Tkinter event loop
 window.mainloop()
+
+# author: Panas Pokharel
